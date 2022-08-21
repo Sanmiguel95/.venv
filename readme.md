@@ -9,7 +9,7 @@ Calidad del Software
 
 ### Prerrequisitors 🔧
 
-Leer el archivo [requirements.txt](https://github.com/mtejada073/Taller2/blob/main/requirements.txt) para más detalles
+Leer el archivo [requirements.txt](https://github.com/Sanmiguel95/TallerServicio1/blob/master/requirements.txt) para más detalles
 
 ### Software a Instalar ⚙️
 
