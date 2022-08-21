@@ -24,7 +24,7 @@ def read_root(idUsuario: str):
     url = 'https://63025538c6dda4f287b7ee62.mockapi.io/infoUsers/service1'
     responseData = ResponseData(idUsuario= idUsuario)
     
-    requestResult = requests.get(url + "?idUsuario" + idUsuario, timeout=5)
+    requestResult = requests.get(url + "?idUsuario=" + idUsuario, timeout=5)
     
     if(len(requestResult.json()) >= 1):
         responseData.internalId = requestResult.json()[0]["internalId"]
