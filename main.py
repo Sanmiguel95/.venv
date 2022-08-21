@@ -15,16 +15,23 @@ logger = logging.getLogger(__name__)  # the __name__ resolve to "main" since we 
 
 app = FastAPI()
 
+class ResponseData(BaseModel):
+    idUsuario: str
+    internalId: int = 0
 
-@app.get("/")
-def read_root():
-    url = 'https://62f6640ba3bce3eed7c04b72.mockapi.io/items'
-    response = requests.get(url, {}, timeout=5)
-    return {"items": response.json() }
-
-
-@app.get("/items/{item_id}")
-def read_item(item_id: int, q: Union[str, None] = None):
-    return {"item_id": item_id, "q": q}
+@app.get("/infoUsers/{idUsuario}", response_model=ResponseData)
+def read_root(idUsuario: str):
+    logger.debug("idUsuario recibido: " + idUsuario)
+    
+    url = 'https://63025538c6dda4f287b7ee62.mockapi.io/infoUsers/service1/'
+    responseData = ResponseData(idUsuario= idUsuario)
+    
+    requestResult = requests.get(url + "?usuario=" + idUsuario, timeout=5)
+    
+    if(len(requestResult.json()) >= 1):
+        responseData.internalId = requestResult.json()[0]["internalId"]
+        return Response(content= responseData.json())
+    else:
+        return Response(status_code= status.HTTP_204_NO_CONTENT)
 
 Instrumentator().instrument(app).expose(app) 
